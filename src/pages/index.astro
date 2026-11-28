@@ -3,48 +3,339 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+interface WorkerItem {
+	name: string;
+	url: string;
+	domainLabel: string;
+	category: 'Komunitas & Kaffah' | 'Aplikasi & Backend' | 'Pembayaran & Muamalah' | 'Ekosistem & Developer';
+	role: string;
+}
+
+const workers: WorkerItem[] = [
+	{
+		name: 'Abdi Worker',
+		url: 'https://abdi.greatmall.cloud',
+		domainLabel: 'abdi.greatmall.cloud',
+		category: 'Komunitas & Kaffah',
+		role: 'Layanan & sinkronisasi data abdi komunitas.',
+	},
+	{
+		name: 'AbdiCity Worker',
+		url: 'https://abdicity.greatmall.cloud',
+		domainLabel: 'abdicity.greatmall.cloud',
+		category: 'Komunitas & Kaffah',
+		role: 'Portal & worker ekosistem kawasan AbdiCity.',
+	},
+	{
+		name: 'Amanah Worker',
+		url: 'https://amanah.greatmall.cloud',
+		domainLabel: 'amanah.greatmall.cloud',
+		category: 'Komunitas & Kaffah',
+		role: 'Layanan tata kelola, etika, dan kepercayaan komunitas.',
+	},
+	{
+		name: 'App Worker',
+		url: 'https://app.greatmall.cloud',
+		domainLabel: 'app.greatmall.cloud',
+		category: 'Aplikasi & Backend',
+		role: 'Gerbang utama aplikasi web dan antarmuka layanan.',
+	},
+	{
+		name: 'Backend Worker',
+		url: 'https://backend.greatmall.cloud',
+		domainLabel: 'backend.greatmall.cloud',
+		category: 'Aplikasi & Backend',
+		role: 'Pemrosesan API, orkestrasi data, dan integrasi sistem.',
+	},
+	{
+		name: 'Cerdas Worker',
+		url: 'https://cerdas.greatmall.cloud',
+		domainLabel: 'cerdas.greatmall.cloud',
+		category: 'Aplikasi & Backend',
+		role: 'Layanan kecerdasan, otomatisasi, dan analisis pintar.',
+	},
+	{
+		name: 'Concierge Worker',
+		url: 'https://concierge.greatmall.cloud',
+		domainLabel: 'concierge.greatmall.cloud',
+		category: 'Aplikasi & Backend',
+		role: 'Asisten panduan pengguna, alur kerja, dan layanan cepat.',
+	},
+	{
+		name: 'Cripto Worker',
+		url: 'https://cripto.greatmall.cloud',
+		domainLabel: 'cripto.greatmall.cloud',
+		category: 'Pembayaran & Muamalah',
+		role: 'Endpoint utilitas aset digital dan verifikasi transaksi.',
+	},
+	{
+		name: 'Customer Gersaka Worker',
+		url: 'https://customer.gersaka.cloud',
+		domainLabel: 'customer.gersaka.cloud',
+		category: 'Pembayaran & Muamalah',
+		role: 'Layanan pelanggan dan riwayat transaksi Gersaka.',
+	},
+	{
+		name: 'Gersaka Worker',
+		url: 'https://gersaka.greatmall.cloud',
+		domainLabel: 'gersaka.greatmall.cloud',
+		category: 'Ekosistem & Developer',
+		role: 'Integrasi dan orkestrasi layanan ekosistem Gersaka.',
+	},
+	{
+		name: 'GitHubCity Worker',
+		url: 'https://githubcity.greatmall.cloud',
+		domainLabel: 'githubcity.greatmall.cloud',
+		category: 'Ekosistem & Developer',
+		role: 'Pusat repositori, otomasi rilis, dan kolaborasi kode.',
+	},
+	{
+		name: 'Global GreatMall Worker',
+		url: 'https://global.greatmall.cloud',
+		domainLabel: 'global.greatmall.cloud',
+		category: 'Ekosistem & Developer',
+		role: 'Routing lintas wilayah dan konektivitas jaringan global.',
+	},
+	{
+		name: 'IslamicityPay Worker',
+		url: 'https://islamicitypay.greatmall.cloud',
+		domainLabel: 'islamicitypay.greatmall.cloud',
+		category: 'Pembayaran & Muamalah',
+		role: 'Pemrosesan pembayaran berprinsip keadilan dan transparansi.',
+	},
+	{
+		name: 'LaravelCity Worker',
+		url: 'https://laravelcity.greatmall.cloud',
+		domainLabel: 'laravelcity.greatmall.cloud',
+		category: 'Ekosistem & Developer',
+		role: 'Layanan aplikasi dan modul backend berbasis Laravel.',
+	},
+	{
+		name: 'Merchant Worker',
+		url: 'https://merchant.greatmall.cloud',
+		domainLabel: 'merchant.greatmall.cloud',
+		category: 'Pembayaran & Muamalah',
+		role: 'Portal pengelolaan toko, katalog, dan operasional merchant.',
+	},
+	{
+		name: 'Payment Worker',
+		url: 'https://payment.greatmall.cloud',
+		domainLabel: 'payment.greatmall.cloud',
+		category: 'Pembayaran & Muamalah',
+		role: 'Gerbang pembayaran, status tagihan, dan rekonsiliasi.',
+	},
+];
+
+const categories = [
+	'Semua',
+	'Komunitas & Kaffah',
+	'Aplikasi & Backend',
+	'Pembayaran & Muamalah',
+	'Ekosistem & Developer',
+] as const;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="id">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the greatmall official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+		<main class="portfolio-hub">
+			<section class="hero">
+				<p class="eyebrow">blog.portfolio.greatmall.cloud • Direktori Worker & Portofolio</p>
+				<h1>Ekosistem Cerdas &amp; Berdaya GreatMall</h1>
+				<p class="lead">
+					Pusat tautan langsung menuju seluruh <strong>16 worker</strong> dan layanan aktif di jaringan
+					GreatMall &amp; Gersaka, lengkap dengan catatan arsitektur, dokumentasi teknis, dan tulisan
+					portofolio.
+				</p>
+				<div class="hero-actions">
+					<a class="btn-primary" href="#worker-directory">Jelajahi 16 Worker</a>
+					<a class="btn-secondary" href="/blog">Baca Catatan &amp; Portofolio</a>
+				</div>
+			</section>
+
+			<section id="worker-directory" class="directory-section" aria-labelledby="directory-heading">
+				<div class="directory-header">
+					<div>
+						<h2 id="directory-heading">Direktori Worker Aktif</h2>
+						<p class="subcopy">
+							Klik tautan subdomain untuk membuka endpoint/worker secara langsung di tab baru.
+						</p>
+					</div>
+					<div class="controls">
+						<input
+							id="worker-search"
+							type="search"
+							placeholder="Cari worker atau domain..."
+							aria-label="Cari worker atau domain"
+						/>
+					</div>
+				</div>
+
+				<div class="filter-pills" role="group" aria-label="Filter kategori worker">
+					{
+						categories.map((cat, idx) => (
+							<button
+								type="button"
+								class:list={['filter-pill', { active: idx === 0 }]}
+								data-category={cat}
+							>
+								{cat}
+							</button>
+						))
+					}
+				</div>
+
+				<div id="worker-grid" class="worker-grid">
+					{
+						workers.map((worker) => (
+							<article class="worker-card" data-category={worker.category} data-search={`${worker.name} ${worker.domainLabel} ${worker.role} ${worker.category}`.toLowerCase()}>
+								<div class="card-top">
+									<span class="badge">{worker.category}</span>
+									<a
+										href={worker.url}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="visit-link"
+									>
+										Buka Worker ↗
+									</a>
+								</div>
+								<h3 class="worker-title">
+									<a href={worker.url} target="_blank" rel="noopener noreferrer">
+										{worker.name}
+									</a>
+								</h3>
+								<p class="worker-domain">
+									<a href={worker.url} target="_blank" rel="noopener noreferrer">
+										{worker.domainLabel}
+									</a>
+								</p>
+								<p class="worker-role">{worker.role}</p>
+							</article>
+						))
+					}
+				</div>
+				<p id="empty-state" class="empty-state" hidden>
+					Tidak ada worker yang cocok dengan kata kunci atau filter tersebut.
+				</p>
+			</section>
+
+			<section class="quickstart-section">
+				<h2>Panduan Cepat Pengembangan di Astro</h2>
+				<ul class="guide-list">
+					<li>
+						<strong>Halaman Utama &amp; Direktori:</strong> Kelola daftar worker dan blok utama di{' '}
+						<code>src/pages/index.astro</code>.
+					</li>
+					<li>
+						<strong>Navigasi &amp; Identitas Footer:</strong> Sesuaikan tautan menu di{' '}
+						<code>src/components/Header.astro</code> dan informasi pemilik di{' '}
+						<code>src/components/Footer.astro</code>.
+					</li>
+					<li>
+						<strong>Artikel &amp; Studi Kasus Portofolio:</strong> Tambahkan tulisan teknis dan arsitektur
+						integrasi di <code>src/content/blog/</code> serta tata letaknya di{' '}
+						<code>src/layouts/BlogPost.astro</code>.
+					</li>
+					<li>
+						<strong>Konfigurasi Build &amp; Integrasi:</strong> Atur domain, RSS, dan integrasi tambahan
+						pada <code>astro.config.mjs</code>.
+					</li>
+				</ul>
+			</section>
 		</main>
 		<Footer />
-	</body>
-</html>
+
+		<script is:inline>
+			(() => {
+				const searchInput = document.getElementById('worker-search');
+				const filterButtons = Array.from(document.querySelectorAll('.filter-pill'));
+				const cards = Array.from(document.querySelectorAll('.worker-card'));
+				const emptyState = document.getElementById('empty-state');
+
+				let activeCategory = 'Semua';
+
+				function applyFilters() {
+					const query = (searchInput?.value || '').trim().toLowerCase();
+					let visibleCount = 0;
+
+					for (const card of cards) {
+						const cardCat = card.getAttribute('data-category') || '';
+						const haystack = card.getAttribute('data-search') || '';
+						const matchesCategory = activeCategory === 'Semua' || cardCat === activeCategory;
+						const matchesQuery = !query || haystack.includes(query);
+						const show = matchesCategory && matchesQuery;
+
+						card.toggleAttribute('hidden', !show);
+						if (show) visibleCount++;
+					}
+
+					if (emptyState) {
+						emptyState.hidden = visibleCount > 0;
+					}
+				}
+
+				for (const btn of filterButtons) {
+					btn.addEventListener('click', () => {
+						activeCategory = btn.getAttribute('data-category') || 'Semua';
+						for (const item of filterButtons) {
+							item.classList.toggle('active', item === btn);
+						}
+						applyFilters();
+					});
+				}
+
+				searchInput?.addEventListener('input', applyFilters);
+			})();
+		</script>
+
+		<style>
+			.portfolio-hub {
+				max-width: 1080px;
+				margin: 0 auto;
+				padding: 2rem 1.25rem 4rem;
+			}
+
+			.hero {
+				padding: 2rem;
+				border-radius: 16px;
+				background: linear-gradient(135deg, rgba(35, 55, 255, 0.08), rgba(16, 185, 129, 0.08));
+				border: 1px solid rgba(127, 127, 127, 0.2);
+				margin-bottom: 2.5rem;
+			}
+
+			.eyebrow {
+				font-size: 0.85rem;
+				font-weight: 600;
+				letter-spacing: 0.04em;
+				text-transform: uppercase;
+				margin: 0 0 0.5rem;
+				opacity: 0.8;
+			}
+
+			.hero h1 {
+				margin: 0 0 0.75rem;
+				font-size: clamp(1.85rem, 3.5vw, 2.75rem);
+				line-height: 1.15;
+			}
+
+			.lead {
+				margin: 0 0 1.5rem;
+				max-width: 70ch;
+				line-height: 1.65;
+			}
+
+			.hero-actions {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.75rem;
+			}
+
+			.btn-primary,
+			.btn-secondary {
+				display: inline-
